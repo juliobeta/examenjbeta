@@ -1,0 +1,51 @@
+﻿@model examenjbeta.Models.Orders
+
+<div class="order-details-container">
+    <h2>Detalles de la Orden</h2>
+
+    <div>
+        <label>Cliente:</label>
+        @Model.Customers.first_name @Model.Customers.last_name
+    </div>
+    <div>
+        <label>Fecha de la Orden:</label>
+        @Model.order_date.ToString("dd/MM/yyyy")
+    </div>
+    <div>
+        <label>Fecha Requerida:</label>
+        @Model.required_date.ToString("dd/MM/yyyy")
+    </div>
+    <div>
+        <label>Tienda:</label>
+        @Model.Stores.store_name
+    </div>
+    <div>
+        <label>Empleado:</label>
+        @Model.Staffs.first_name @Model.Staffs.last_name
+    </div>
+
+    <h3>Items de la Orden</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Descuento</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Order_items)
+            {
+                <tr>
+                    <td>@item.Products.product_name</td>
+                    <td>@item.quantity</td>
+                    <td>@item.list_price.ToString("C")</td>
+                    <td>@item.discount.ToString("C")</td>
+                    <td>@((item.quantity * item.list_price) - item.discount)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

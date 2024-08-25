@@ -1,0 +1,104 @@
+﻿@model examenjbeta.ViewModels.OrderViewModel
+
+<div class="order-container">
+    <h2>Generar Orden de Compra</h2>
+    @using (Html.BeginForm("CreateOrder", "Orders", FormMethod.Post))
+    {
+        <div class="left-panel">
+            <div class="form-group">
+                @Html.LabelFor(m => m.CustomerId)
+                @Html.DropDownListFor(m => m.CustomerId, (SelectList)ViewBag.Customers, "Seleccione un cliente", new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.OrderDate)
+                @Html.TextBoxFor(m => m.OrderDate, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.RequiredDate)
+                @Html.TextBoxFor(m => m.RequiredDate, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.StoreId)
+                @Html.DropDownListFor(m => m.StoreId, (SelectList)ViewBag.Stores, "Seleccione una tienda", new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.UserId)
+                @Html.DropDownListFor(m => m.UserId, (SelectList)ViewBag.Users, "Seleccione un usuario", new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="right-panel">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Código del Producto</th>
+                        <th>Nombre del Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th>Descuento</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.OrderItems.Count; i++)
+                    {
+                        <tr>
+                            <td>@Html.TextBoxFor(m => m.OrderItems[i].ProductId, new { @class = "form-control", @onchange = "updateProductInfo(this, " + i + ")" })</td>
+                            <td>@Html.TextBoxFor(m => m.OrderItems[i].ProductName, new { @class = "form-control", @readonly = "readonly" })</td>
+                            <td>@Html.TextBoxFor(m => m.OrderItems[i].Quantity, new { @class = "form-control", @onchange = "calculateTotal(" + i + ")" })</td>
+                            <td>@Html.TextBoxFor(m => m.OrderItems[i].ListPrice, new { @class = "form-control", @readonly = "readonly" })</td>
+                            <td>@Html.TextBoxFor(m => m.OrderItems[i].Discount, new { @class = "form-control", @onchange = "calculateTotal(" + i + ")" })</td>
+                            <td>@Html.TextBox("OrderItems[" + i + "].Total", null, new { @class = "form-control", @readonly = "readonly" })</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+                <input type="button" value="Cancelar" class="btn btn-secondary" onclick="location.href='@Url.Action("CreateOrder", "Orders")'" />
+            </div>
+        </div>
+    }
+
+    <!-- Mostrar errores de stock insuficiente -->
+    @if (ViewBag.StockError != null)
+    {
+        <div class="alert alert-danger">
+            @Html.Raw(ViewBag.StockError)
+        </div>
+    }
+
+    <script type="text/javascript">
+    function updateProductInfo(element, index) {
+        var productId = $(element).val();
+
+        $.ajax({
+            url: '@Url.Action("GetProductInfo", "Orders")',
+            type: 'GET',
+            data: { productId: productId },
+            success: function (data) {
+                if (data.error) {
+                    alert(data.error);
+                } else {
+                    // Actualizar los campos correspondientes en la fila
+                    $('input[name="OrderItems[' + index + '].ProductName"]').val(data.ProductName);
+                    $('input[name="OrderItems[' + index + '].ListPrice"]').val(data.ListPrice);
+
+                    // Recalcular el total
+                    calculateTotal(index);
+                }
+            },
+            error: function () {
+                alert('Error al obtener la información del producto.');
+            }
+        });
+    }
+
+    function calculateTotal(index) {
+        var quantity = parseFloat($('input[name="OrderItems[' + index + '].Quantity"]').val()) || 0;
+        var listPrice = parseFloat($('input[name="OrderItems[' + index + '].ListPrice"]').val()) || 0;
+        var discount = parseFloat($('input[name="OrderItems[' + index + '].Discount"]').val()) || 0;
+
+        var total = (quantity * listPrice) - discount;
+        $('input[name="OrderItems[' + index + '].Total"]').val(total.toFixed(2));
+    }
+    </script>

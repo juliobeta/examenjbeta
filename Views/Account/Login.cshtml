@@ -1,0 +1,38 @@
+﻿@model examenjbeta.ViewModels.LoginViewModel
+
+<!-- Contenedor principal para la vista de inicio de sesión -->
+<div class="login-container">
+    <!-- Título de la página de inicio de sesión -->
+    <h2>Iniciar Sesión</h2>
+
+    <!-- Formulario de inicio de sesión que envía una solicitud POST al método Login del AccountController -->
+    @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+    {
+        <!-- Campo de entrada para el nombre de usuario -->
+        <div class="form-group">
+            @Html.Label("Usuario") <!-- Etiqueta personalizada para el campo de nombre de usuario -->
+            @Html.TextBoxFor(m => m.Username, new { @class = "form-control" }) <!-- Campo de texto vinculado a la propiedad Username del modelo -->
+        </div>
+
+        <!-- Campo de entrada para la contraseña -->
+        <div class="form-group">
+            @Html.Label("Contraseña") <!-- Etiqueta personalizada para el campo de contraseña -->
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control" }) <!-- Campo de contraseña vinculado a la propiedad Password del modelo -->
+        </div>
+
+        <!-- Botones de acción para el formulario -->
+        <div class="form-group">
+            <!-- Botón para enviar el formulario y autenticar al usuario -->
+            <input type="submit" value="Iniciar" class="btn btn-primary" />
+
+            <!-- Botón para cancelar y redirigir nuevamente a la vista de login -->
+            <input type="button" value="Cancelar" class="btn btn-secondary" onclick="location.href='@Url.Action("Login", "Account")'" />
+
+            <!-- Botón para redirigir al formulario de registro -->
+            <input type="button" value="Registrarse" class="btn btn-success" onclick="location.href='@Url.Action("Register", "Account")'" />
+        </div>
+
+        <!-- Resumen de validación que muestra mensajes de error si los hay -->
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    }
+</div>

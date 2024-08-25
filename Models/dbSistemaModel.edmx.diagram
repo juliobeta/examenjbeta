@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6e48c46abcea454f9ea5f1e3755fde9a" Name="Diagram1">
+        <EntityTypeShape EntityType="examenjbeta.Models.Brands" Width="1.5" PointX="1.5" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="examenjbeta.Models.Categories" Width="1.5" PointX="1.5" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="examenjbeta.Models.Customers" Width="1.5" PointX="3" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="examenjbeta.Models.Order_items" Width="1.5" PointX="7.5" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="examenjbeta.Models.Orders" Width="1.5" PointX="5.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="examenjbeta.Models.Products" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="examenjbeta.Models.Staffs" Width="1.5" PointX="3" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="examenjbeta.Models.Stocks" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="examenjbeta.Models.Stores" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="examenjbeta.Models.SystemUser" Width="1.5" PointX="5.25" PointY="10.25" IsExpanded="true" />
+        <AssociationConnector Association="examenjbeta.Models.FK__Products__brand___5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="examenjbeta.Models.FK__Products__catego__60A75C0F" ManuallyRouted="false" />
+        <AssociationConnector Association="examenjbeta.Models.FK__Orders__customer__693CA210" ManuallyRouted="false" />
+        <AssociationConnector Association="examenjbeta.Models.FK__Order_ite__order__6E01572D" ManuallyRouted="false" />
+        <AssociationConnector Association="examenjbeta.Models.FK__Order_ite__produ__6EF57B66" ManuallyRouted="false" />
+        <AssociationConnector Association="examenjbeta.Models.FK__Orders__staff_id__6B24EA82" ManuallyRouted="false" />
+        <AssociationConnector Association="examenjbeta.Models.FK__Orders__store_id__6A30C649" ManuallyRouted="false" />
+        <AssociationConnector Association="examenjbeta.Models.FK__Stocks__product___6477ECF3" ManuallyRouted="false" />
+        <AssociationConnector Association="examenjbeta.Models.FK__Staffs__manager___52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="examenjbeta.Models.FK__Staffs__store_id__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="examenjbeta.Models.FK__SystemUse__staff__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="examenjbeta.Models.FK__Stocks__store_id__6383C8BA" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
