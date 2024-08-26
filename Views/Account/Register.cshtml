@@ -1,62 +1,63 @@
 ﻿@model examenjbeta.ViewModels.RegisterViewModel
 
-<!-- Contenedor principal para el formulario de registro -->
+<!-- Contenedor principal para generar el formulario de registro -->
 <div class="register-container">
     <h2>Registro de Usuario</h2>
 
-    <!-- Comienza el formulario para registrar un usuario nuevo -->
+    
+    <!-- Comienza el formulario para el registro de un usuario nuevo -->
     @using (Html.BeginForm("Register", "Account", FormMethod.Post))
     {
-        <!-- Campo para ingresar la Identificación del usuario -->
+        <!-- Campo para ingresar el identificador del usuario -->
         <div class="form-group">
-            @Html.Label("Identificación") <!-- Etiqueta personalizada -->
+            @Html.Label("Identificación") 
             @Html.TextBoxFor(m => m.StaffId, new { @class = "form-control" })
         </div>
 
-        <!-- Campo para ingresar el Nombre del usuario -->
+        <!-- Campo para ingresar el Nombre del usuario a registrar-->
         <div class="form-group">
-            @Html.Label("Nombre") <!-- Etiqueta personalizada -->
+            @Html.Label("Nombre") 
             @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control" })
         </div>
 
         <!-- Campo para ingresar el Apellido del usuario -->
         <div class="form-group">
-            @Html.Label("Apellido") <!-- Etiqueta personalizada -->
+            @Html.Label("Apellido") 
             @Html.TextBoxFor(m => m.Apellido, new { @class = "form-control" })
         </div>
 
-        <!-- Campo para ingresar el Correo electrónico del usuario -->
+        <!-- Campo para ingresar el email del usuario -->
         <div class="form-group">
-            @Html.Label("Correo") <!-- Etiqueta personalizada -->
+            @Html.Label("Correo") 
             @Html.TextBoxFor(m => m.Correo, new { @class = "form-control" })
         </div>
 
-        <!-- Checkbox para indicar si el usuario está activo o inactivo -->
+        <!-- Checkbox para indicar si el usuario está activo (1) o inactivo (0) -->
         <div class="form-group">
-            @Html.Label("Activo") <!-- Etiqueta personalizada -->
+            @Html.Label("Activo") 
             @Html.CheckBoxFor(m => m.Activo)
         </div>
 
-        <!-- Campo para seleccionar la Tienda asociada al usuario -->
+        <!-- Campo para seleccionar a que Tienda esta asociado al usuario -->
         <div class="form-group">
-            @Html.Label("Tienda") <!-- Etiqueta personalizada -->
+            @Html.Label("Tienda") 
             @Html.DropDownListFor(m => m.TiendaId, new SelectList(ViewBag.Tiendas, "store_id", "store_name"), "Seleccione una tienda", new { @class = "form-control" })
         </div>
 
         <!-- Campo para ingresar la Contraseña del usuario -->
         <div class="form-group">
-            @Html.Label("Contraseña") <!-- Etiqueta personalizada -->
+            @Html.Label("Contraseña") 
             @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
         </div>
 
-        <!-- Botones para enviar el formulario, cancelar la operación, o iniciar sesión -->
+        <!-- Botones para visualizar el formulario, cancelar la operación, o iniciar sesión -->
         <div class="form-group">
             <input type="submit" value="Guardar" class="btn btn-primary" />
             <input type="button" value="Cancelar" class="btn btn-secondary" onclick="location.href='@Url.Action("Login", "Account")'" />
             <input type="button" value="Iniciar Sesión" class="btn btn-success" onclick="location.href='@Url.Action("Login", "Account")'" />
         </div>
 
-        <!-- Mostrar mensajes de validación en caso de errores -->
+        <!-- Mostrar mensaje de validación en caso de errores -->
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     }
 </div>
