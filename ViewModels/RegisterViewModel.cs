@@ -1,9 +1,9 @@
 ﻿namespace examenjbeta.ViewModels
 {
-    // ViewModel utilizado para capturar los datos del formulario de registro de usuario
+    // ViewModel es utilizado para capturar los datos del formulario de registro de usuario
     public class RegisterViewModel
     {
-        // Identificación del Staff. Este valor se vincula con el campo staff_id en la base de datos
+        // Identificación del Staff. Este valor vinculado al campo staff_id en la base de datos
         public int StaffId { get; set; }
 
         // Nombre del usuario que se está registrando
@@ -12,7 +12,7 @@
         // Apellido del usuario que se está registrando
         public string Apellido { get; set; }
 
-        // Dirección de correo electrónico del usuario. Utilizada también para generar el nombre de usuario
+        // Dirección email del usuario. Utilizada también para generar el nombre de usuario
         public string Correo { get; set; }
 
         // Indica si el usuario está activo o no. Se convierte a un byte (1 o 0) para almacenarlo en la base de datos
